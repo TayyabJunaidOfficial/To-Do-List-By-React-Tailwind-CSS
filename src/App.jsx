@@ -7,10 +7,25 @@ function App() {
 
   const handleAdd=()=>{
     setTodos([...todos, addTodo]);
-    console.log(todos);
-    
     setAddTodo("");
   }
+
+  const handleEdit = (id)=>{ 
+    let t = todos.filter(i=>i.id === id) 
+    if (t.length > 0) { 
+      setAddTodo(t[0].todo); 
+      let newTodos = todos.filter(item => item.id !== id);
+      setTodos(newTodos);
+    }    
+  }
+  
+  const handleDelete= (id)=>{  
+    let newTodos = todos.filter(item=>{
+      return item.id!==id
+    }); 
+    setTodos(newTodos)
+  }
+
   return (
     <>
       <Navbar />
@@ -23,14 +38,14 @@ function App() {
           </button>
         </div>
         <h1 className="text-xl font-bold">Your Tasks</h1>
-       {todos.map((todo)=>{
-        return  <div key={todo} className="flex gap-2">
-         <div>{todo}</div>
+       {todos.map((item,index)=>{
+        return  <div key={index} className="flex gap-2">
+         <div>{item}</div>
          <div>
-           <button className="bg-violet-600 text-white font-bold hover:bg-violet-800 px-3 py-0.5 rounded-lg mr-2 cursor-pointer">
+           <button onClick={(e)=>handleEdit(e, item.id)} className="bg-violet-600 text-white font-bold hover:bg-violet-800 px-3 py-0.5 rounded-lg mr-2 cursor-pointer">
              Edit
            </button>
-           <button className="bg-violet-600 text-white font-bold hover:bg-violet-800 px-3 py-0.5 rounded-lg cursor-pointer">
+           <button onClick={(e)=>{handleDelete(e, item.id)}} className="bg-violet-600 text-white font-bold hover:bg-violet-800 px-3 py-0.5 rounded-lg cursor-pointer">
              Delete
            </button>
          </div>

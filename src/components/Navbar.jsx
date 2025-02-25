@@ -3,7 +3,7 @@ import React from "react";
 const Navbar = () => {
   return (
     <>
-      <div className="flex justify-between items-center text-white bg-violet-400 py-2">
+      <div className="flex justify-between items-center text-white bg-violet-600 py-2">
         <div>
           <span>
             <a href="#" className="text-2xl mx-5 font-bold">iTask</a>

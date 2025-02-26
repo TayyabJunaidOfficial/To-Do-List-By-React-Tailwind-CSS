@@ -5,6 +5,7 @@ function App() {
   const [addTodo, setAddTodo] = useState("");
   const [todos, setTodos] = useState([]);
   const [edit, setEdit] = useState(null);
+  const [check, setCheck] = useState();
 
   const handleAdd = () => {
     if (edit !== null) {
@@ -15,7 +16,7 @@ function App() {
       );
       setEdit(null);
     } else {
-      setTodos([...todos, { id: Date.now(), text: addTodo }]);
+      setTodos([...todos, { id: Date.now(), text: addTodo, completed: false }]);
     }
     setAddTodo("");
   };
@@ -27,6 +28,14 @@ function App() {
 
   const handleDelete = (id) => {
     setTodos(todos.filter((todo) => todo.id !== id));
+  };
+
+  const handleCheck = (id) => {
+    setTodos(
+      todos.map((todo) =>
+        todo.id === id ? { ...todo, completed: !todo.completed } : todo
+      )
+    );
   };
   return (
     <>
@@ -63,7 +72,12 @@ function App() {
                 key={todo.id}
                 className=" py-1 flex justify-center my-2 gap-2"
               >
-                <div className="w-96 rounded-xl ">{todo.text}</div>
+                <input
+                  type="checkbox"
+                  checked={todo.completed}
+                  onChange={() => handleCheck(todo.id)}
+                />
+                <div className={`w-96 rounded-xl ${todo.completed ? "line-through text-gray-500" : ""}`}>{todo.text}</div>
                 <div>
                   <button
                     onClick={() => handleEdit(todo)}

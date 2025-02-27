@@ -5,7 +5,6 @@ function App() {
   const [addTodo, setAddTodo] = useState("");
   const [todos, setTodos] = useState([]);
   const [edit, setEdit] = useState(null);
-  const [check, setCheck] = useState();
 
   const handleAdd = () => {
     if (edit !== null) {
@@ -41,7 +40,7 @@ function App() {
     <>
       <div className="bg-violet-100 min-h-screen">
         <Navbar />
-        <div className="border-2 bg-violet-200 shadow-xl w-fit rounded-xl m-auto my-2 p-4">
+        <div className="border-2 bg-violet-200 shadow-xl sm:w-fit w-xs rounded-xl m-auto my-2 p-4">
           <h1 className="text-xl text-center font-bold">
             iTask - Manage your to-do's at one place
           </h1>
@@ -56,7 +55,7 @@ function App() {
               onChange={(e) => {
                 setAddTodo(e.target.value);
               }}
-              className="border-1 bg-white w-md rounded-xl"
+              className="border-1 bg-white sm:w-md w-40 rounded-xl"
             />
             <button
               onClick={handleAdd}
@@ -70,7 +69,7 @@ function App() {
             return (
               <div
                 key={todo.id}
-                className=" py-1 flex justify-center my-2 gap-2"
+                className=" py-1 flex justify-center items-center my-2 gap-2"
               >
                 <input
                   type="checkbox"
@@ -78,7 +77,7 @@ function App() {
                   onChange={() => handleCheck(todo.id)}
                 />
                 <div className={`w-96 rounded-xl ${todo.completed ? "line-through text-gray-500" : ""}`}>{todo.text}</div>
-                <div>
+                <div className="flex justify-center items-center">
                   <button
                     onClick={() => handleEdit(todo)}
                     className="bg-violet-600 text-white font-bold hover:bg-violet-800 px-3 py-0.5 rounded-xl mx-1 cursor-pointer"

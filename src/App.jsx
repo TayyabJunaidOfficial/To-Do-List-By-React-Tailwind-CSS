@@ -7,6 +7,10 @@ function App() {
   const [edit, setEdit] = useState(null);
 
   const handleAdd = () => {
+    if (!addTodo.trim()) {
+      alert("Add Task First")
+      return;
+    };
     if (edit !== null) {
       setTodos(
         todos.map((todo) =>
